@@ -99,7 +99,7 @@ class AirCargoProblem(Problem):
                             precond_neg = []
                             effect_add = [expr("At({}, {})".format(p, to))]
                             effect_rem = [expr("At({}, {})".format(p, fr))]
-                            strformat = "Fly({}, {}, {})".format(p, fr, to))
+                            strformat = "Fly({}, {}, {})".format(p, fr, to)
                             fly = Action(expr(strformat),
                                          [precond_pos, precond_neg],
                                          [effect_add, effect_rem])
