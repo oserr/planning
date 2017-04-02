@@ -219,6 +219,14 @@ def create_load_action(cargo, plane, airport):
     return Action(load_expr, preconditions, effects)
 
 
+def create_unload_action(cargo, plane, airport):
+    '''Returns an unload action.'''
+    preconditions = create_unload_preconditions(cargo, plane, airport)
+    effects = create_unload_effects(cargo, plane, airport)
+    unload_expr = create_unload(cargo, plane, airport)
+    return Action(unload_expr, preconditions, effects)
+
+
 def create_load_preconditions(cargo, plane, airport):
     '''Returns a list of preconditions for a load action.'''
     precond_pos = [
