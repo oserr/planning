@@ -77,8 +77,11 @@ class AirCargoProblem(Problem):
             :return: list of Action objects
             '''
             unloads = []
-            # TODO create all Unload ground actions from the domain Unload
-            # action
+            for c in self.cargos:
+                for p in self.planes:
+                    for a in self.airports:
+                        unload_action = create_unload_action(c, p, a)
+                        unloads.append(load_action)
             return unloads
 
         def fly_actions():
