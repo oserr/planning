@@ -117,10 +117,8 @@ class AirCargoProblem(Problem):
                 if clause not in kb.clauses:
                     is_possible = False
                     break
-            '''
             if not is_possible:
                 continue
-            '''
             for clause in action.precond_neg:
                 if clause in kb.clauses:
                     is_possible = False
