@@ -206,3 +206,11 @@ def air_cargo_p2() -> AirCargoProblem:
 def air_cargo_p3() -> AirCargoProblem:
     # TODO implement Problem 3 definition
     pass
+
+
+def create_load_action(cargo, plane, airport):
+    '''Returns a load action.'''
+    preconditions = create_load_preconditions(cargo, plane, airport)
+    effects = create_load_effects(cargo, plane, airport)
+    load_expr = create_load(cargo, plane, airport)
+    return Action(load_expr, preconditions, effects)
