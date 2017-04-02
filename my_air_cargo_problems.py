@@ -248,3 +248,8 @@ def create_cargo(cargo):
 def create_plane(plane):
     '''Returns a Plane expression for a given plane.'''
     return expr('Plane({})'.format(plane))
+
+
+def create_in(cargo, plane):
+    '''Returns an In expression for a given cargo and plane.'''
+    return expr('In({},{})'.format(cargo, plane))
