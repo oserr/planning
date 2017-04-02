@@ -223,3 +223,8 @@ def create_load_preconditions(cargo, plane, airport):
         create_cargo(cargo), create_plane(plane)
     ]
     return [precond_pos, []]
+
+
+def create_load_effects(cargo, plane, airport):
+    '''Returns a list of action effects for a load action.'''
+    return [[create_at(cargo, airport)], [create_in(cargo, plane)]]
