@@ -117,8 +117,10 @@ class AirCargoProblem(Problem):
                 if clause not in kb.clauses:
                     is_possible = False
                     break
+            '''
             if not is_possible:
                 continue
+            '''
             for clause in action.precond_neg:
                 if clause in kb.clauses:
                     is_possible = False
@@ -329,7 +331,7 @@ def create_load_preconditions(cargo, plane, airport):
 
 def create_load_effects(cargo, plane, airport):
     '''Returns a list of action effects for a load action.'''
-    return [[create_in(cargo, airport)], [create_at(cargo, plane)]]
+    return [[create_in(cargo, plane)], [create_at(cargo, airport)]]
 
 
 def create_load(cargo, plane, airport):
@@ -347,7 +349,7 @@ def create_unload_action(cargo, plane, airport):
 
 def create_unload_preconditions(cargo, plane, airport):
     '''Returns a list of preconditions for an unload action.'''
-    precond_pos = [create_in(cargo, airport), create_at(plane, airport)]
+    precond_pos = [create_in(cargo, plane), create_at(plane, airport)]
     return [precond_pos, []]
 
 
