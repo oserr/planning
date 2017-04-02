@@ -243,3 +243,8 @@ def create_at(thing, location):
 def create_cargo(cargo):
     '''Returns a Cargo expression for a given cargo.'''
     return expr('Cargo({})'.format(cargo))
+
+
+def create_plane(plane):
+    '''Returns a Plane expression for a given plane.'''
+    return expr('Plane({})'.format(plane))
