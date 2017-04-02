@@ -219,14 +219,6 @@ def create_load_action(cargo, plane, airport):
     return Action(load_expr, preconditions, effects)
 
 
-def create_unload_action(cargo, plane, airport):
-    '''Returns an unload action.'''
-    preconditions = create_unload_preconditions(cargo, plane, airport)
-    effects = create_unload_effects(cargo, plane, airport)
-    unload_expr = create_unload(cargo, plane, airport)
-    return Action(unload_expr, preconditions, effects)
-
-
 def create_load_preconditions(cargo, plane, airport):
     '''Returns a list of preconditions for a load action.'''
     precond_pos = [
@@ -244,6 +236,34 @@ def create_load_effects(cargo, plane, airport):
 def create_load(cargo, plane, airport):
     '''Returns a Load expression for the given cargo, plane, and airport.'''
     return expr('Load({},{},{})'.format(cargo, plane, airport))
+
+
+def create_unload_action(cargo, plane, airport):
+    '''Returns an unload action.'''
+    preconditions = create_unload_preconditions(cargo, plane, airport)
+    effects = create_unload_effects(cargo, plane, airport)
+    unload_expr = create_unload(cargo, plane, airport)
+    return Action(unload_expr, preconditions, effects)
+
+
+def create_unload_preconditions(cargo, plane, airport):
+    '''Returns a list of preconditions for an unload action.'''
+    precond_pos = [
+        create_in(cargo, airport), create_at(plane, airport),
+        create_cargo(cargo), create_plane(plane)
+    ]
+    return [precond_pos, []]
+
+
+def create_unload_effects(cargo, plane, airport):
+    '''Returns a list of action effects for an unload action.'''
+    return [[create_at(cargo, airport)], [create_in(cargo, plane)]]
+
+
+def create_unload(cargo, plane, airport):
+    '''Returns a Load expression for the given cargo, plane, and airport.'''
+    return expr('Unload({},{},{})'.format(cargo, plane, airport))
+
 
 
 def create_at(thing, location):
