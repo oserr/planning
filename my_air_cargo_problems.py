@@ -231,5 +231,10 @@ def create_load_effects(cargo, plane, airport):
 
 
 def create_load(cargo, plane, airport):
-    '''Returns a Load for the given cargo, plane, and airport.'''
+    '''Returns a Load expression for the given cargo, plane, and airport.'''
     return expr('Load({},{},{})'.format(cargo, plane, airport))
+
+
+def create_at(thing, location):
+    '''Returns an At expression for a given thing and a location.'''
+    return expr('At({},{})'.format(thing, location))
