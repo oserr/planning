@@ -241,10 +241,8 @@ def create_load_action(cargo, plane, airport):
 
 def create_load_preconditions(cargo, plane, airport):
     '''Returns a list of preconditions for a load action.'''
-    precond_pos = [
-        create_at(cargo, airport), create_at(plane, airport),
-        create_cargo(cargo), create_plane(plane)
-    ]
+    precond_pos = [create_at(cargo, airport), create_at(plane, airport),
+                   create_cargo(cargo), create_plane(plane)]
     return [precond_pos, []]
 
 
@@ -268,10 +266,8 @@ def create_unload_action(cargo, plane, airport):
 
 def create_unload_preconditions(cargo, plane, airport):
     '''Returns a list of preconditions for an unload action.'''
-    precond_pos = [
-        create_in(cargo, airport), create_at(plane, airport),
-        create_cargo(cargo), create_plane(plane)
-    ]
+    precond_pos = [create_in(cargo, airport), create_at(plane, airport),
+                   create_cargo(cargo), create_plane(plane)]
     return [precond_pos, []]
 
 
