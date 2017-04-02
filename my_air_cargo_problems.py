@@ -81,7 +81,7 @@ class AirCargoProblem(Problem):
                 for p in self.planes:
                     for a in self.airports:
                         unload_action = create_unload_action(c, p, a)
-                        unloads.append(load_action)
+                        unloads.append(unload_action)
             return unloads
 
         def fly_actions():
