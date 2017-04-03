@@ -366,14 +366,14 @@ class PlanningGraph():
         # Russell-Norvig text
         # 1. determine what literals to add
         # 2. connect the nodes
-        # for example, every A node in the previous level has a list of S nodes
-        # in effnodes that represent the effect
-        # produced by the action. These literals will all be part of the new S
-        # level.  Since we are working with sets, they may be "added" to the
-        # set without fear of duplication.  However, it is important to then
-        # correctly create and connect all of the new S nodes as children of
-        # all the A nodes that could produce them, and likewise add the A nodes
-        # to the parent sets of the S nodes
+        # For example, every A node in the previous level has a list of S nodes
+        # in effnodes that represent the effect produced by the action. These
+        # literals will all be part of the new S level. Since we are working
+        # with sets, they may be "added" to the set without fear of
+        # duplication. However, it is important to then correctly create and
+        # connect all of the new S nodes as children of all the A nodes that
+        # could produce them, and likewise add the A nodes to the parent sets
+        # of the S nodes
 
     def update_a_mutex(self, nodeset):
         ''' Determine and update sibling mutual exclusion for A-level nodes
