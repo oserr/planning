@@ -244,7 +244,7 @@ class PlanningGraph():
         self.problem = problem
         self.fs = decode_state(state, problem.state_map)
         self.serial = serial_planning
-        self.all_actions = self.problem.actions_list +
+        self.all_actions = self.problem.actions_list + \
                            self.noop_actions(self.problem.state_map)
         self.s_levels = []
         self.a_levels = []
@@ -351,6 +351,18 @@ class PlanningGraph():
         # that are a subset of the previous S level. Once an action node is
         # added, it MUST be connected to the S node instances in the
         # appropriate s_level set.
+        action_set = set()
+        for action in self.all_actions:
+            conditions = set()
+            for pos in action.precond_pos:
+                conditions.add(PgNode_s(pos, True))
+            for neg in action.precond_neg:
+                conditions.add(PgNode_s(neg, False))
+            if self.s_levels[level].issubset(conditions):
+                action_node = PgNode_a(action)
+                action_node.parents.update(self.s_levels[level])
+                action_set.add(action_node)
+        self.a_levels.append(action_set)
 
     def add_literal_level(self, level):
         ''' add an S (literal) level to the Planning Graph
@@ -374,6 +386,7 @@ class PlanningGraph():
         # connect all of the new S nodes as children of all the A nodes that
         # could produce them, and likewise add the A nodes to the parent sets
         # of the S nodes
+        self.s_levels.append(set())
 
     def update_a_mutex(self, nodeset):
         ''' Determine and update sibling mutual exclusion for A-level nodes
@@ -484,7 +497,7 @@ class PlanningGraph():
         nodelist = list(nodeset)
         for i, n1 in enumerate(nodelist[:-1]):
             for n2 in nodelist[i + 1:]:
-                if self.negation_mutex(n1, n2) or
+                if self.negation_mutex(n1, n2) or \
                    self.inconsistent_support_mutex(n1, n2):
                     mutexify(n1, n2)
 
