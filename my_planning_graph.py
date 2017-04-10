@@ -557,7 +557,8 @@ class PlanningGraph():
         :return: bool
         '''
         # TODO test for Inconsistent Support between nodes
-        return False
+        return all(a1.is_mutex(a2) for a1 in node_s1.parents
+                                   for a2 in node_s2.parents)
 
     def h_levelsum(self) -> int:
         '''The sum of the level costs of the individual goals (admissible if
