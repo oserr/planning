@@ -202,7 +202,7 @@ class PgNode_a(PgNode):
 
 def mutexify(node1: PgNode, node2: PgNode):
     ''' adds sibling nodes to each other's mutual exclusion (mutex) set. These
-    should be sibling nodes!  
+    should be sibling nodes!
 
     :param node1: PgNode (or inherited PgNode_a, PgNode_s types)
     :param node2: PgNode (or inherited PgNode_a, PgNode_s types)
@@ -218,7 +218,7 @@ def mutexify(node1: PgNode, node2: PgNode):
 class PlanningGraph():
     '''
     A planning graph as described in chapter 10 of the AIMA text. The planning
-    graph can be used to reason about 
+    graph can be used to reason about
     '''
 
     def __init__(self, problem: Problem, state: str, serial_planning=True):
@@ -463,7 +463,7 @@ class PlanningGraph():
 
     def interference_mutex(self, node_a1: PgNode_a, node_a2: PgNode_a) -> bool:
         '''
-        Test a pair of actions for mutual exclusion, returning True if the 
+        Test a pair of actions for mutual exclusion, returning True if the
         effect of one action is the negation of a precondition of the other.
 
         HINT: The Action instance associated with an action node is accessible
@@ -566,8 +566,15 @@ class PlanningGraph():
 
         :return: int
         '''
-        level_sum = 0
         # TODO implement
         # for each goal in the problem, determine the level cost, then add them
         # together
+        level_sum = 0
+        goal_states = {PgNode_s(literal, True) for literal in self.problem.goal}
+        assert goal_states, 'Problem should have at least one goal state'
+        for level_states in self.s_levels:
+            goal_states.difference_update(level_states)
+            if not goal_states:
+                break
+            level_sum += len(goal_states)
         return level_sum
