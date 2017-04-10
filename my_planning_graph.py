@@ -359,7 +359,6 @@ class PlanningGraph():
             for neg in action.precond_neg:
                 conditions.add(PgNode_s(neg, False))
             if conditions.issubset(self.s_levels[level]):
-            #  if self.s_levels[level].issubset(conditions):
                 action_node = PgNode_a(action)
                 action_node.parents.update(self.s_levels[level])
                 action_set.add(action_node)
