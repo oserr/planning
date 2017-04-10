@@ -352,15 +352,19 @@ class PlanningGraph():
         # added, it MUST be connected to the S node instances in the
         # appropriate s_level set.
         action_set = set()
+        state_nodes = self.s_levels[level]
         for action in self.all_actions:
             conditions = set()
             for pos in action.precond_pos:
                 conditions.add(PgNode_s(pos, True))
             for neg in action.precond_neg:
                 conditions.add(PgNode_s(neg, False))
-            if conditions.issubset(self.s_levels[level]):
+            if conditions.issubset(state_nodes):
                 action_node = PgNode_a(action)
-                action_node.parents.update(self.s_levels[level])
+                for s in state_nodes:
+                    if s in action_node.prenodes:
+                        s.children.add(action_node)
+                    action_node.parents.add(s)
                 action_set.add(action_node)
         self.a_levels.append(action_set)
 
