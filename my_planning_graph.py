@@ -358,7 +358,8 @@ class PlanningGraph():
                 conditions.add(PgNode_s(pos, True))
             for neg in action.precond_neg:
                 conditions.add(PgNode_s(neg, False))
-            if self.s_levels[level].issubset(conditions):
+            if conditions.issubset(self.s_levels[level]):
+            #  if self.s_levels[level].issubset(conditions):
                 action_node = PgNode_a(action)
                 action_node.parents.update(self.s_levels[level])
                 action_set.add(action_node)
@@ -386,7 +387,15 @@ class PlanningGraph():
         # connect all of the new S nodes as children of all the A nodes that
         # could produce them, and likewise add the A nodes to the parent sets
         # of the S nodes
-        self.s_levels.append(set())
+        state_nodes = set()
+        for action_node in self.a_levels[level-1]:
+            for state in action_node.effnodes:
+                if state not in state_nodes:
+                    action_node.children.add(state)
+                    state.parents.add(action_node)
+                    state_nodes.add(state)
+        self.s_levels.append(state_nodes)
+
 
     def update_a_mutex(self, nodeset):
         ''' Determine and update sibling mutual exclusion for A-level nodes
