@@ -415,10 +415,10 @@ class PlanningGraph():
         nodelist = list(nodeset)
         for i, n1 in enumerate(nodelist[:-1]):
             for n2 in nodelist[i + 1:]:
-                if (self.serialize_actions(n1, n2) or
-                        self.inconsistent_effects_mutex(n1, n2) or
-                        self.interference_mutex(n1, n2) or
-                        self.competing_needs_mutex(n1, n2)):
+                if (self.serialize_actions(n1, n2) \
+                    or self.inconsistent_effects_mutex(n1, n2) \
+                    or self.interference_mutex(n1, n2) \
+                    or self.competing_needs_mutex(n1, n2)):
                     mutexify(n1, n2)
 
     def serialize_actions(self, node_a1: PgNode_a, node_a2: PgNode_a) -> bool:
