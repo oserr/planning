@@ -472,7 +472,8 @@ class PlanningGraph():
         :return: bool
         '''
         # TODO test for Interference between nodes
-        return False
+        return node_a1.action.effect_add in node_a2.action.precond_neg \
+            or node_a2.action.effect_add in node_a1.action.precond_neg
 
     def competing_needs_mutex(self, node_a1: PgNode_a,
                               node_a2: PgNode_a) -> bool:
