@@ -6,3 +6,8 @@
 
 # File used to capture output of run_search.py
 run_search_out.txt
+
+# Files created as by-product of compiling latex
+*.log
+*.aux
+*.pdf
