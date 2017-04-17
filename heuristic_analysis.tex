@@ -1,0 +1,43 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{geometry}
+\geometry{top=1in}
+\usepackage{multirow}
+
+\title{Written analyis for planning project}
+\author{Omar A. Serrano}
+
+\begin{document}
+
+\maketitle
+
+\begin{tabular}{|c|l|l|l|r|}
+    \hline
+    & \textbf{Search} & \textbf{Expansions} & \textbf{Plan Length} & \textbf{Time (sec)} \\
+    \hline
+    \multirow{4}{*}{\textit{Problem 1}} & BFS & 43 & 6 & 0.02587 \\
+    \cline{2-5}
+    & DFS & 21 & 20 & 0.01181 \\
+    \cline{2-5}
+    & A* ignore preconditions & 41 & 6 & 0.02637 \\
+    \cline{2-5}
+    & A* levelsum & 11 & 6 & 3.67303 \\
+    \hline
+    \multirow{4}{*}{\textit{Problem 2}} & BFS & 3343 & 9 & 12.07154 \\
+    \cline{2-5}
+    & DFS & 624 & 619 & 3.00142 \\
+    \cline{2-5}
+    & A* ignore preconditions & 1506 & 9 & 10.82272 \\
+    \cline{2-5}
+    & A* levelsum & 86 & 9 & 1357.63188 \\
+    \hline
+    \multirow{4}{*}{\textit{Problem 3}} & BFS & 14663 & 12 & 90.45000 \\
+    \cline{2-5}
+    & DFS & 408 & 392 & 1.54737 \\
+    \cline{2-5}
+    & A* ignore preconditions & 5118 & 12 & 73.72976 \\
+    \cline{2-5}
+    & A* levelsum & 414 & 12 & 10100.00274 \\
+    \hline
+\end{tabular}
+
+\end{document}
