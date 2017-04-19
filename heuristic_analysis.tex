@@ -1,14 +1,37 @@
 \documentclass[10pt,a4paper]{article}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{mdframed}
 \usepackage{geometry}
 \geometry{top=1in}
 \usepackage{multirow}
 
-\title{Written analyis for planning project}
+\pagestyle{headings}
+\definecolor{light-grey}{gray}{0.95}
+
+\mdfsetup{frametitlealignment=\center}
+
+\title{Analyis for planning project}
 \author{Omar A. Serrano}
 
 \begin{document}
 
 \maketitle
+
+\section*{Analysis of uninformed search}
+
+In all three problems, DFS expands less nodes than BFS, which expands less nodes
+than UCS. BFS and UCS produce plans with equivalent lengths, which are
+significantly cheaper than the plans produced by DFS. DFS produces plans quicker
+than BFS, which produces plans quicker than UCS. The relationship between the
+number of nodes BFS and DFS expand seems to correlate with the total time it
+takes for each search algorithm to produce a plan. With problem 1, for example,
+BFS takes a little more than twice what DFS takes, which corresponds to the
+number of nodes they expand. The same, however, does not apply to BFS and UCS.
+Even though UCS expands about 50\% more nodes than BFS, it takes more than three
+times to compute a plan, with the exception of problem 1.
+
+\hfill \break
 
 \begin{tabular}{|c|l|l|l|r|}
     \hline
@@ -19,26 +42,109 @@
     \cline{2-5}
     & DFS & 21 & 20 & 0.01181 \\
     \cline{2-5}
-    & A* ignore preconditions & 41 & 6 & 0.02637 \\
+    & UCS & 55 & 6 & 0.03291 \\
     \cline{2-5}
-    & A* levelsum & 11 & 6 & 3.67303 \\
+    & A* \textit{IgnorePreconditions} & 41 & 6 & 0.02637 \\
+    \cline{2-5}
+    & A* \textit{LevelSum} & 11 & 6 & 3.67303 \\
     \hline
     \multirow{4}{*}{\textit{Problem 2}} & BFS & 3343 & 9 & 12.07154 \\
     \cline{2-5}
     & DFS & 624 & 619 & 3.00142 \\
     \cline{2-5}
-    & A* ignore preconditions & 1506 & 9 & 10.82272 \\
+    & UCS & 4853 & 9 & 42.40486 \\
     \cline{2-5}
-    & A* levelsum & 86 & 9 & 1357.63188 \\
+    & A* \textit{IgnorePreconditions} & 1506 & 9 & 10.82272 \\
+    \cline{2-5}
+    & A* \textit{LevelSum} & 86 & 9 & 1357.63188 \\
     \hline
     \multirow{4}{*}{\textit{Problem 3}} & BFS & 14663 & 12 & 90.45000 \\
     \cline{2-5}
     & DFS & 408 & 392 & 1.54737 \\
     \cline{2-5}
-    & A* ignore preconditions & 5118 & 12 & 73.72976 \\
+    & UCS & 18223 & 12 & 335.00286 \\
     \cline{2-5}
-    & A* levelsum & 414 & 12 & 10100.00274 \\
+    & A* \textit{IgnorePreconditions} & 5118 & 12 & 73.72976 \\
+    \cline{2-5}
+    & A* \textit{LevelSum} & 414 & 12 & 10100.00274 \\
     \hline
 \end{tabular}
+
+\section*{Analysis of informed search}
+
+In all three problems, \textit{IgnorePreconditions} expanded more nodes than
+\textit{LevelSum}, but it expands significantly more nodes in problems 2 and 3,
+by more than 1000\%. Both produce plans of equal length, but \textit{LevelSum}
+takes more time to compute the plan, especially in problems 1 and 2, where
+it takes more than 1000\% of the time taken by \textit{IgnorePreconditons}.
+
+\begin{mdframed}[frametitle={Problem 1: Optimal Plan},
+                 backgroundcolor=light-grey, roundcorner=10pt,
+                 leftmargin=1, rightmargin=1,
+                 innerleftmargin=15, innerrightmargin=15,
+                 innertopmargin=15, innerbottommargin=15,
+                 outerlinewidth=1, linecolor=light-grey]
+\begin{lstlisting}
+Load(C1, P1, SFO)
+Load(C2, P2, JFK)
+Fly(P2, JFK, SFO)
+Unload(C2, P2, SFO)
+Fly(P1, SFO, JFK)
+Unload(C1, P1, JFK)
+\end{lstlisting}
+\end{mdframed}
+
+\section*{Informed vs. uninformed search}
+
+Ultimately, there is no search algorithm that performs better than all the
+others in every aspect. \textit{LevelSum}, for example, performs very well,
+on average, in terms of the total number of nodes expanded, and the optimality
+of the plan, however, the time it takes to produce a plan can increase
+dramatically, taking substantially more than the other algorithms on problems
+2 and 3. DFS, on the othe hand, produces the least optimal plans, but it is the
+quickest of the algorithms to produce a plan, and in two out of three problems
+it expands less nodes than everyone else.
+
+\begin{mdframed}[frametitle={Problem 2: Optimal Plan},
+                 backgroundcolor=light-grey, roundcorner=10pt,
+                 leftmargin=1, rightmargin=1,
+                 innerleftmargin=15, innerrightmargin=15,
+                 innertopmargin=15, innerbottommargin=15,
+                 outerlinewidth=1, linecolor=light-grey]
+\begin{lstlisting}
+Load(C1, P1, SFO)
+Load(C2, P2, JFK)
+Load(C3, P3, ATL)
+Fly(P2, JFK, SFO)
+Unload(C2, P2, SFO)
+Fly(P1, SFO, JFK)
+Unload(C1, P1, JFK)
+Fly(P3, ATL, SFO)
+Unload(C3, P3, SFO)
+\end{lstlisting}
+\end{mdframed}
+
+
+\begin{mdframed}[frametitle={Problem 3: Optimal Plan},
+                 backgroundcolor=light-grey, roundcorner=10pt,
+                 leftmargin=1, rightmargin=1,
+                 innerleftmargin=15, innerrightmargin=15,
+                 innertopmargin=15, innerbottommargin=15,
+                 outerlinewidth=1, linecolor=light-grey]
+\begin{lstlisting}
+Load(C1, P1, SFO)
+Load(C2, P2, JFK)
+Fly(P2, JFK, ORD)
+Load(C4, P2, ORD)
+Fly(P1, SFO, ATL)
+Load(C3, P1, ATL)
+Fly(P1, ATL, JFK)
+Unload(C1, P1, JFK)
+Unload(C3, P1, JFK)
+Fly(P2, ORD, SFO)
+Unload(C2, P2, SFO)
+Unload(C4, P2, SFO)
+\end{lstlisting}
+\end{mdframed}
 
 \end{document}
