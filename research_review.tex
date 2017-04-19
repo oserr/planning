@@ -10,15 +10,49 @@
 
 \maketitle
 
-Research in AI planning and search has led to the development of many techniques and algorithms. Three of these techniques are total-order planning, partial-order planning, and GRAPHPLAN.
+Research in AI planning and search has led to the development of many techniques
+and algorithms. Three of these techniques are total-order planning,
+partial-order planning, and GRAPHPLAN.
 
-The earliest planners used total-order planning, also known as linear programming \cite{1}. The technique specifies the complete sequence of actions for the task at once \cite{2}, making it an incomplete approach, because it cannot distinguish between two competing plans, but complete planners must be able to combine squences of actions from different subplans \cite{1}.
+The earliest planners used total-order planning, also known as linear
+programming \cite{1}. The technique specifies the complete sequence of actions
+for the task at once \cite{2}, making it an incomplete approach, because it
+cannot distinguish between two competing plans, but complete planners must be
+able to combine squences of actions from different subplans \cite{1}.
 
-Partial-order planning emerged as a solution to the problem of mixing actions from different subplans, with key traits of being able to detect conflics and preventing interference between conditions that have been met \cite{1}. A partial-order does not specify the order of actions when the order is not important, but does determine all the actions for a plan, and it consits of four components: a set of actions, a partial order of the set of actions, a set of causal relations between the set of actions and preconditions for other actions, and a set of open preconditions that are not satisfied by the current plan of actions \cite{2}. The disadvantage of partial-order planning is that the approach tends to be computationally more expensive because the algorithm is more complex, and thus may not be well suited in circumstances were the planning agent (i.e., a robot) needs to minimize power consumption \cite{2}.
+Partial-order planning emerged as a solution to the problem of mixing actions
+from different subplans, with key traits of being able to detect conflics and
+preventing interference between conditions that have been met \cite{1}. A
+partial-order does not specify the order of actions when the order is not
+important, but does determine all the actions for a plan, and it consits of four
+components: a set of actions, a partial order of the set of actions, a set of
+causal relations between the set of actions and preconditions for other actions,
+and a set of open preconditions that are not satisfied by the current plan of
+actions \cite{2}. The disadvantage of partial-order planning is that the
+approach tends to be computationally more expensive because the algorithm is
+more complex, and thus may not be well suited in circumstances were the planning
+agent (i.e., a robot) needs to minimize power consumption \cite{2}.
 
-GRAPHPLAN, developed in the mid 1990s, departs from state space graph search by representing the space as nodes of actions and facts arranged in alternate levels \cite{3}. The first level contains the facts representing the intial state, the next level is built of actions that have the intial state as a precondition, and then the next level is built of the states or facts that are consequent of the actions in the previous level \cite{3}. The algorithm continues in this way, iteratively building up one level of before building the next as it proves there are no solutions in the current level.
+GRAPHPLAN, developed in the mid 1990s, departs from state space graph search by
+representing the space as nodes of actions and facts arranged in alternate
+levels \cite{3}. The first level contains the facts representing the intial
+state, the next level is built of actions that have the intial state as a
+precondition, and then the next level is built of the states or facts that are
+consequent of the actions in the previous level \cite{3}. The algorithm
+continues in this way, iteratively building up one level of before building the
+next as it proves there are no solutions in the current level.
 
-Even though the technique used by GRAPHPLAN is a more modern technique than partial-order planning, and partial-order planning is more modern than total-order planning, no technique is wholly superior than the others. Total-order planning, for example, which lacks completeness when planning requires interleaving squence of actions, is complete for problems characterized by serializable subgoas \cite{1}, and thus for this kind of problems it may be more efficient than a partial-ordering solution, which tend to be more computationally expensive. More generally, techniques that use search do better with problems that have solutions that can be found without backtracking, whereas problems that require backtracking are better suited to constraint-based solutions, of which GRAPHPLAN is an example \cite{1}.
+Even though the technique used by GRAPHPLAN is a more modern technique than
+partial-order planning, and partial-order planning is more modern than
+total-order planning, no technique is wholly superior than the others.
+Total-order planning, for example, which lacks completeness when planning
+requires interleaving squence of actions, is complete for problems characterized
+by serializable subgoas \cite{1}, and thus for this kind of problems it may be
+more efficient than a partial-ordering solution, which tend to be more
+computationally expensive. More generally, techniques that use search do better
+with problems that have solutions that can be found without backtracking,
+whereas problems that require backtracking are better suited to constraint-based
+solutions, of which GRAPHPLAN is an example \cite{1}.
 
 \begin{thebibliography}{9}
 \bibitem{1}
