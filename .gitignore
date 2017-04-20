@@ -11,3 +11,6 @@ run_search_out.txt
 *.log
 *.aux
 *.pdf
+
+# Zip files
+*.zip
