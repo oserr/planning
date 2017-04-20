@@ -31,6 +31,13 @@ number of nodes they expand. The same, however, does not apply to BFS and UCS.
 Even though UCS expands about 50\% more nodes than BFS, it takes more than three
 times to compute a plan, with the exception of problem 1.
 
+Even though we cannot expect for BFS to always expand more nodes than DFS, it
+will happen if the goal state is toward the left and bottom of a tree, because
+those are the paths that DFS explores first. For example, if the height of the
+tree is $h_{tree}$ and the goal state is the left most leaf in a complete
+tree, then DFS will only expand $h_{tree}$ nodes, while BFS would expand
+every node except the nodes in last level \cite{1}.
+
 \hfill \break
 
 \begin{tabular}{|c|l|l|l|r|}
@@ -146,5 +153,12 @@ Unload(C2, P2, SFO)
 Unload(C4, P2, SFO)
 \end{lstlisting}
 \end{mdframed}
+
+\begin{thebibliography}{9}
+\bibitem{1}
+    Russell, Stuart, Norvig, Peter.
+    \emph{Artificial Intelligence: A Modern Approach}.
+    3rd Ed. New Jersey: Pearson Education, 2010. Print.
+\end{thebibliography}
 
 \end{document}
